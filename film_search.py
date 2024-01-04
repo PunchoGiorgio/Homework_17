@@ -56,6 +56,7 @@ class SearchData:
 
                     else:
                         print("Unknown command")
+                        print()
                         obj.search_program()
 
                 elif len(tit_found) == 0:
