@@ -27,14 +27,11 @@ class SearchData:
                 title_input = input("Enter the movie title (перше слово має бути з великої лiтeри, наступнi, крiм 'of', 'the', 'to', тощо, теж з великої): ")
                 print()
 
-                tit_found = []
-                for i in csv_data[1:]:
-                    if title_input in i[1]:
-                        tit_found.append(i[1])
+                tit_found = list(i[1] for i in csv_data[1:] if title_input in i[1])
 
                 if len(tit_found) > 1:
-                    for counter, s in enumerate(tit_found):
-                        print(counter + 1,  s)
+                    for self.count, s in enumerate(tit_found):
+                        print(self.count + 1,  s)
 
                     choice_tit_num = int(input("\nChoose the movie number: "))
                     print()
@@ -47,6 +44,7 @@ class SearchData:
                     print(tit_found[0])
                     print()
                     choice_mov = input("Receive the movie info(y) or return to main menu(n)?: ")
+                    print()
                     if choice_mov == 'y':
                         for b in csv_data[1:]:
                             if tit_found[0] == b[1]:
