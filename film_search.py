@@ -16,11 +16,6 @@ class SearchData:
     def __init__(self, count=0):
         self.count = count
 
-    def count_func(self):
-
-        count_list = [el for el in range(1, self.count + 1)]
-        return count_list
-
     def search_program(self):
 
         choice_main = input("Start the search(s) or exit(e)?: ")
@@ -109,10 +104,8 @@ class SearchData:
                 choice_mov_num = int(input("Choose the number of the movie: "))
                 print()
                 for f in csv_data[1:]:
-                    for num in obj.count_func():
-                        if num == choice_mov_num:
-                            if genre_titles[num - 1] in f:
-                                print(f'imdb_id: {f[0]}\ntitle: {f[1]}\nyear: {f[2]}\npopularity: {f[3]}\ndescription: "{f[4]}"')
+                    if genre_titles[choice_mov_num - 1] in f:
+                        print(f'imdb_id: {f[0]}\ntitle: {f[1]}\nyear: {f[2]}\npopularity: {f[3]}\ndescription: "{f[4]}"')
 
             elif choice_sub == 'r':
                 obj.search_program()
