@@ -29,7 +29,7 @@ class SearchData:
             choice_sub = input("Search by title(t) or genre(g), or return to main menu(r)?: ")
             print()
             if choice_sub == 't':
-                title_input = input("Enter the movie title: ")
+                title_input = input("Enter the movie title (перше слово має бути з великої лiтари, наступнi, крiм 'of', 'the', 'to', тощо, теж з великої): ")
                 print()
 
                 tit_found = []
@@ -40,13 +40,13 @@ class SearchData:
 
                         tit_found.append(i[1])
 
-                        choice_tit_num = int(input("\nChoose the movie number: "))
-                        print()
-                        for k in csv_data[1:]:
-                            for num in obj.count_func():
-                                if num == choice_tit_num:
-                                    if tit_found[num - 1] in k:
-                                        print(f'imdb_id: {k[0]}\ntitle: {k[1]}\nyear: {k[2]}\npopularity: {k[3]}\ndescription: "{k[4]}"')
+                choice_tit_num = int(input("\nChoose the movie number: "))
+                print()
+                for k in csv_data[1:]:
+                    for num in obj.count_func():
+                        if num == choice_tit_num:
+                            if tit_found[num - 1] in k:
+                                print(f'imdb_id: {k[0]}\ntitle: {k[1]}\nyear: {k[2]}\npopularity: {k[3]}\ndescription: "{k[4]}"')
 
             elif choice_sub == 'g':
                 genre_list = []
