@@ -35,24 +35,40 @@ class SearchData:
                 tit_found = []
                 for i in csv_data[1:]:
                     if title_input in i[1]:
-                        print(self.count + 1, i[1])
-                        self.count += 1
-
                         tit_found.append(i[1])
 
-                if len(tit_found) == 0:
-                    print("No such movie in the base")
-                    print()
-                    obj.search_program()
+                if len(tit_found) > 1:
+                    for counter, s in enumerate(tit_found):
+                        print(counter + 1,  s)
 
-                else:
                     choice_tit_num = int(input("\nChoose the movie number: "))
                     print()
                     for k in csv_data[1:]:
-                        for num in obj.count_func():
-                            if num == choice_tit_num:
-                                if tit_found[num - 1] in k:
-                                    print(f'imdb_id: {k[0]}\ntitle: {k[1]}\nyear: {k[2]}\npopularity: {k[3]}\ndescription: "{k[4]}"')
+                        if tit_found[choice_tit_num - 1] in k:
+                            print(f'imdb_id: {k[0]}\ntitle: {k[1]}\nyear: {k[2]}\npopularity: {k[3]}\ndescription: "{k[4]}"')
+                            break
+
+                elif len(tit_found) == 1:
+                    print(tit_found[0])
+                    print()
+                    choice_mov = input("Receive the movie info(y) or return to main menu(n)?: ")
+                    if choice_mov == 'y':
+                        for b in csv_data[1:]:
+                            if tit_found[0] == b[1]:
+                                print(f'imdb_id: {b[0]}\ntitle: {b[1]}\nyear: {b[2]}\npopularity: {b[3]}\ndescription: "{b[4]}"')
+                                sys.exit()
+
+                    elif choice_mov == 'n':
+                        obj.search_program()
+
+                    else:
+                        print("Unknown command")
+                        obj.search_program()
+
+                elif len(tit_found) == 0:
+                    print("No such movie in the base")
+                    print()
+                    obj.search_program()
 
             elif choice_sub == 'g':
                 genre_list = []
