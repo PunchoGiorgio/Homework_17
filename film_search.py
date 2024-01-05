@@ -24,10 +24,10 @@ class SearchData:
             choice_sub = input("Search by title(t) or genre(g), or return to main menu(r)?: ")
             print()
             if choice_sub == 't':
-                title_input = input("Enter the movie title (перше слово має бути з великої лiтeри, наступнi, крiм 'of', 'the', 'to', тощо, теж з великої): ")
+                title_input = input("Enter the movie title: ")
                 print()
 
-                tit_found = list(i[1] for i in csv_data[1:] if title_input in i[1])
+                tit_found = list(i[1] for i in csv_data[1:] if title_input.casefold() in i[1].casefold())
 
                 if len(tit_found) > 1:
                     for self.count, s in enumerate(tit_found):
