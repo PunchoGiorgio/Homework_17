@@ -5,7 +5,6 @@ import pytz
 
 
 class Addition:
-
     def __init__(self, title=None):
         self.title = title
 
@@ -184,7 +183,6 @@ class Addition:
         }
 
         response = requests.get(url, headers=headers, params=querystring)
-
         return response.json()['titleType']['id']
 
     def more_like_this(self):
