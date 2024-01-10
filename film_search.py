@@ -108,10 +108,10 @@ class SearchData:
                             f'imdb_id: {f[0]}\ntitle: {f[1]}\nyear: {f[2]}\npopularity: {f[3]}\ndescription: "{f[4]}"')
 
             elif choice_sub == 'y':
-                choice_tit_mov = input("Enter the title of the movie: ")
+                choice_tit_mov = int(input("Enter the year: "))
                 print()
 
-                tit_found = list(i[1] for i in csv_data[1:] if choice_tit_mov.casefold() in i[1].casefold())
+                tit_found = list(i[1] for i in csv_data[1:] if choice_tit_mov == int(i[2]))
 
                 if len(tit_found) > 1:
                     for v in csv_data[1:]:
@@ -124,30 +124,23 @@ class SearchData:
                     choice_tit_num = int(input("\nChoose the movie number: "))
                     print()
                     for k in csv_data[1:]:
-                        for p in csv_data[1:]:
-                            if tit_found[choice_tit_num - 1] in k:
-                                if k[2] == p[2]:
-                                    print(self.count + 1, p[1], p[2])
-                                    self.count += 1
+                        if tit_found[choice_tit_num - 1] == k[1]:
+                            print(f'imdb_id: {k[0]}\ntitle: {k[1]}\nyear: {k[2]}\npopularity: {k[3]}\ndescription: "{k[4]}"')
 
                 elif len(tit_found) == 1:
                     for h in csv_data[1:]:
-                        if tit_found[0] in h[1]:
+                        if tit_found[0] == h[1]:
                             print(h[1], h[2])
 
-                    self.count = 0
-                    choice_year = input("\nChoose the current movie year(y) or return to main menu(r)?: ")
+                    film_data = input("\nChoose the current movie(m) or return to main menu(r)?: ")
                     print()
-                    if choice_year == 'y':
+                    if film_data == 'm':
                         for b in csv_data[1:]:
-                            for n in csv_data[1:]:
-                                if tit_found[0] in b[1]:
-                                    if b[2] == n[2]:
-                                        print(self.count + 1, n[1], n[2])
-                                        self.count += 1
+                            if tit_found[0] == b[1]:
+                                print(f'imdb_id: {b[0]}\ntitle: {b[1]}\nyear: {b[2]}\npopularity: {b[3]}\ndescription: "{b[4]}"')
 
                 elif len(tit_found) == 0:
-                    print("No such movie in the base")
+                    print("No movies with such year")
                     print()
                     obj.search_program()
 
