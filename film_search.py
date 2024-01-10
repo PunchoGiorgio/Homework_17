@@ -125,7 +125,8 @@ class SearchData:
                     print()
                     for k in csv_data[1:]:
                         if tit_found[choice_tit_num - 1] == k[1]:
-                            print(f'imdb_id: {k[0]}\ntitle: {k[1]}\nyear: {k[2]}\npopularity: {k[3]}\ndescription: "{k[4]}"')
+                            print(
+                                f'imdb_id: {k[0]}\ntitle: {k[1]}\nyear: {k[2]}\npopularity: {k[3]}\ndescription: "{k[4]}"')
 
                 elif len(tit_found) == 1:
                     for h in csv_data[1:]:
@@ -137,7 +138,8 @@ class SearchData:
                     if film_data == 'm':
                         for b in csv_data[1:]:
                             if tit_found[0] == b[1]:
-                                print(f'imdb_id: {b[0]}\ntitle: {b[1]}\nyear: {b[2]}\npopularity: {b[3]}\ndescription: "{b[4]}"')
+                                print(
+                                    f'imdb_id: {b[0]}\ntitle: {b[1]}\nyear: {b[2]}\npopularity: {b[3]}\ndescription: "{b[4]}"')
 
                 elif len(tit_found) == 0:
                     print("No movies with such year")
