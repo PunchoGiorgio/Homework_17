@@ -120,7 +120,6 @@ class SearchData:
                                 print(self.count + 1, el, v[2])
                                 self.count += 1
 
-                    self.count = 0
                     choice_tit_num = int(input("\nChoose the movie number: "))
                     print()
                     for k in csv_data[1:]:
