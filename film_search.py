@@ -108,7 +108,7 @@ class SearchData:
                             f'imdb_id: {f[0]}\ntitle: {f[1]}\nyear: {f[2]}\npopularity: {f[3]}\ndescription: "{f[4]}"')
 
             elif choice_sub == 'y':
-                choice_tit_mov = int(input("Enter the year: "))
+                choice_tit_mov = int(input("Enter the Year: "))
                 print()
 
                 tit_found = list(i[1] for i in csv_data[1:] if choice_tit_mov == int(i[2]))
