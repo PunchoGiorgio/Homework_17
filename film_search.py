@@ -1,4 +1,4 @@
-from pprint import pprint
+from addition_file import Addition
 import csv
 import os
 import sys
@@ -9,19 +9,17 @@ csv_reader = csv.reader(file_obj)
 csv_data = list(csv_reader)
 
 
-# pprint(csv_data)
-
-
 class SearchData:
     def __init__(self, count=0):
         self.count = count
+        self.a = Addition('Class of 1999')
 
     def search_program(self):
 
-        choice_main = input("Start the search(s) or exit(e)?: ")
+        choice_main = input("Start the search(s), extend the csv-file(a) or exit(e)?: ")
         print()
         if choice_main == 's':
-            choice_sub = input("Search by title(t) or genre(g), or return to main menu(r)?: ")
+            choice_sub = input("Search by title(t), genre(g), sort by year(y) or return to main menu(r)?: ")
             print()
             if choice_sub == 't':
                 title_input = input("Enter the movie title: ")
@@ -31,13 +29,14 @@ class SearchData:
 
                 if len(tit_found) > 1:
                     for self.count, s in enumerate(tit_found):
-                        print(self.count + 1,  s)
+                        print(self.count + 1, s)
 
                     choice_tit_num = int(input("\nChoose the movie number: "))
                     print()
                     for k in csv_data[1:]:
                         if tit_found[choice_tit_num - 1] in k:
-                            print(f'imdb_id: {k[0]}\ntitle: {k[1]}\nyear: {k[2]}\npopularity: {k[3]}\ndescription: "{k[4]}"')
+                            print(
+                                f'imdb_id: {k[0]}\ntitle: {k[1]}\nyear: {k[2]}\npopularity: {k[3]}\ndescription: "{k[4]}"')
                             break
 
                 elif len(tit_found) == 1:
@@ -48,7 +47,8 @@ class SearchData:
                     if choice_mov == 'y':
                         for b in csv_data[1:]:
                             if tit_found[0] == b[1]:
-                                print(f'imdb_id: {b[0]}\ntitle: {b[1]}\nyear: {b[2]}\npopularity: {b[3]}\ndescription: "{b[4]}"')
+                                print(
+                                    f'imdb_id: {b[0]}\ntitle: {b[1]}\nyear: {b[2]}\npopularity: {b[3]}\ndescription: "{b[4]}"')
                                 sys.exit()
 
                     elif choice_mov == 'n':
@@ -104,7 +104,52 @@ class SearchData:
                 print()
                 for f in csv_data[1:]:
                     if genre_titles[choice_mov_num - 1] in f:
-                        print(f'imdb_id: {f[0]}\ntitle: {f[1]}\nyear: {f[2]}\npopularity: {f[3]}\ndescription: "{f[4]}"')
+                        print(
+                            f'imdb_id: {f[0]}\ntitle: {f[1]}\nyear: {f[2]}\npopularity: {f[3]}\ndescription: "{f[4]}"')
+
+            elif choice_sub == 'y':
+                choice_tit_mov = input("Enter the title of the movie: ")
+                print()
+
+                tit_found = list(i[1] for i in csv_data[1:] if choice_tit_mov.casefold() in i[1].casefold())
+
+                if len(tit_found) > 1:
+                    for v in csv_data[1:]:
+                        for el in tit_found:
+                            if el in v[1]:
+                                print(self.count + 1, el, v[2])
+                                self.count += 1
+
+                    self.count = 0
+                    choice_tit_num = int(input("\nChoose the movie number: "))
+                    print()
+                    for k in csv_data[1:]:
+                        for p in csv_data[1:]:
+                            if tit_found[choice_tit_num - 1] in k:
+                                if k[2] == p[2]:
+                                    print(self.count + 1, p[1], p[2])
+                                    self.count += 1
+
+                elif len(tit_found) == 1:
+                    for h in csv_data[1:]:
+                        if tit_found[0] in h[1]:
+                            print(h[1], h[2])
+
+                    self.count = 0
+                    choice_year = input("\nChoose the current movie year(y) or return to main menu(r)?: ")
+                    print()
+                    if choice_year == 'y':
+                        for b in csv_data[1:]:
+                            for n in csv_data[1:]:
+                                if tit_found[0] in b[1]:
+                                    if b[2] == n[2]:
+                                        print(self.count + 1, n[1], n[2])
+                                        self.count += 1
+
+                elif len(tit_found) == 0:
+                    print("No such movie in the base")
+                    print()
+                    obj.search_program()
 
             elif choice_sub == 'r':
                 obj.search_program()
@@ -113,6 +158,18 @@ class SearchData:
                 print("Unknown command")
                 print()
                 obj.search_program()
+
+        elif choice_main == 'a':
+            question = input("Are you ready to extend csv-file? Otherwise return to main menu (y/n): ")
+            print()
+            if question == 'y':
+                self.a.extend_csv_file()
+
+            elif question == 'n':
+                obj.search_program()
+
+            else:
+                print("Unknown command")
 
         elif choice_main == 'e':
             sys.exit()
